@@ -1,0 +1,25 @@
+syntax = "proto3"; //协议缓冲区版本
+
+package helloworld;
+
+service Greeter { //定义服务名
+  // 简单gRPC调用
+  rpc mSimple (HelloRequest) returns (HelloReply) {}  //声明一个方法，使用rpc 关键字声明一个sayHelloSimple方法，该方法需要传入参数 HelloRequest,会返回一个结果HelloReply
+
+  // 服务端流式调用
+  rpc mServer (HelloRequest) returns (stream HelloReply) {}
+
+  // 客户端流式调用
+  rpc mClient (stream HelloRequest) returns (HelloReply) {}
+
+  // 客户端服务端双向流
+  rpc mDouble (stream HelloRequest) returns (stream HelloReply) {}
+}
+
+message HelloRequest {//声明方法中参数的类型
+  string name = 1;
+}
+
+message HelloReply {//声明返回结果的类型
+  string message = 1;
+}
